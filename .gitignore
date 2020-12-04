@@ -9,3 +9,4 @@ pyats_learn
 .ssh
 .vscode*
 *.txt
+.bash_history
