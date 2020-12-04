@@ -1,0 +1,8 @@
+pyats learn interface --testbed-file <filename>
+pyats learn ospf --testbed-file <filename>
+
+pyats validate testbed <testbed file>
+
+pyats run job <path to testcase job file> --testbed <path to testbed file>
+pyats logs view
+

@@ -1,0 +1,31 @@
+Issue while building the feature
+
+Traceback (most recent call last):
+  File "src/unicon/statemachine/statemachine.py", line 719, in unicon.statemachine.statemachine.StateMachine.go_to
+  File "src/unicon/statemachine/statetransition.py", line 493, in unicon.statemachine.statetransition.AnyStateTransition.do_transitions
+  File "src/unicon/eal/dialogs.py", line 460, in unicon.eal.dialogs.Dialog.process
+  File "src/unicon/eal/dialog_processor.py", line 304, in unicon.eal.dialog_processor.SimpleDialogProcessor.process
+  File "src/unicon/eal/dialog_processor.py", line 263, in unicon.eal.dialog_processor.SimpleDialogProcessor.timeout_handler
+unicon.core.errors.TimeoutError: timeout occurred:
+              timeout value: 10
+              last_command: ''
+             pattern: ['^.*?% (Bad passwords|Access denied|Authentication failed)', '^.*Login incorrect', '^.*([Uu]sername|[Ll]ogin): ?$', '^.*User Access Verification', '^.*[Pp]assword( for )?(\\S+)?: ?$', '^(.*)Kerberos: No default realm defined for Kerberos!', 'Password OK\\s*$', '^.*Enter passphrase for key .*?:\\s*?', '^.*[Pp]assword( for )?(\\S+)?: ?$', '^.*?% (Bad passwords|Access denied|Authentication failed)', 'rommon[\\s\\d]*>\\s?$', '^(.*?)(Router|Router-stby|Router-sdby|RouterRP|RouterRP-standby|Router4-standby|Router4-sdby|Router4-stby|(S|s)witch|s(S|s)witch\\(standby\\)|Controller|ios|-Slot[0-9]+|Router4)(\\(boot\\))*>\\s?$', '^(.*)\\(.*(con|cfg|ipsec-profile|ca-trustpoint)\\S*\\)#\\s?$', '^(.*?)(Router|Router-stby|Router-sdby|RouterRP|RouterRP-standby|Router4-standby|Router4\\(standby\\)|Router4-sdby|Router4-stby|(S|s)witch|(S|s)witch\\(standby\\)|Controller|ios|-Slot[0-9]+|Router4)(\\(boot\\))*#\\s?$', '^.*--\\s?[Mm]ore\\s?--.*$']
+             buffer:'Unable to negotiate with 192.168.1.124 port 22: no matching cipher found. Their offer: aes128-cbc,3des-cbc,aes192-cbc,aes256-cbc\r\r\n\x00\x00\x00\x03K\x02(X$\x00\x00\x00pyats_learn/ospf_ios_Router3_ops.txtq\x00X(\x00\x00\x00pyats_learn/ospf_ios_Router3_console.txtq\x01X*\x00\x00\x00pyats_learn/ospf_ios_Router3_exception.txtq\x02X\x07\x00\x00\x00Router3q\x03tq\x04q\x05.\x00\x00\x00\x03K\x00(X$\x00\x00\x00pyats_learn/ospf_ios_Router1_ops.txtq\x00X(\x00\x00\x00pyats_learn/ospf_ios_Router1_console.txtq\x01X*\x00\x00\x00pyats_learn/ospf_ios_Router1_exception.txtq\x02X\x07\x00\x00\x00Router1q\x03tq\x04q\x05.\x00\x00\x00\x03K\x01(X$\x00\x00\x00pyats_learn/ospf_ios_Router2_ops.txtq\x00X(\x00\x00\x00pyats_learn/ospf_ios_Router2_console.txtq\x01X*\x00\x00\x00pyats_learn/ospf_ios_Router2_exception.txtq\x02X\x07\x00\x00\x00Router2q\x03tq\x04q\x05.'
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "src/genie/cli/commands/learn.py", line 365, in genie.cli.commands.learn.LearnCommand._retrieve_ops
+  File "/pyats/lib/python3.6/site-packages/genie/libs/ops/ospf/iosxe/ospf.py", line 1017, in learn
+    self.make(final_call=True)
+  File "/pyats/lib/python3.6/site-packages/genie/ops/base/base.py", line 101, in make
+    self.maker.make(*args, **kwargs)
+  File "src/genie/ops/base/maker.py", line 312, in genie.ops.base.maker.Maker.make
+  File "src/genie/ops/base/maker.py", line 418, in genie.ops.base.maker.Maker._call_parser
+  File "src/genie/metaparser/_metaparser.py", line 272, in genie.metaparser._metaparser.MetaParser.parse
+  File "/pyats/lib/python3.6/site-packages/genie/libs/parser/iosxe/show_ospf.py", line 344, in cli
+    out = self.device.execute(self.cli_command)
+  File "src/unicon/bases/routers/services.py", line 223, in unicon.bases.routers.services.BaseService.__call__
+  File "src/unicon/bases/routers/services.py", line 154, in unicon.bases.routers.services.BaseService.pre_service
+  File "src/unicon/statemachine/statemachine.py", line 722, in unicon.statemachine.statemachine.StateMachine.go_to
+unicon.core.errors.StateMachineError: Failed while bringing device to "any" state

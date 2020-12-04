@@ -1,0 +1,20 @@
+
+en
+config t
+hostname Router4
+ip domain-name svk.local
+username cisco privilege 15 password 0 cisco123
+
+crypto key generate rsa modulus 1024
+
+line vty 0 4
+transport input ssh
+login local
+
+interface FastEthernet0/0
+ip address 192.168.1.124 255.255.255.0
+no shut
+
+end
+
+wr mem

@@ -1,0 +1,35 @@
+testbed:
+  name: SVK AUTOMATION LAB
+  credentials:
+      default:
+        password: '%ENC{w5PDosOUw5fDosKQwpbCmA==}'
+        username: cisco
+      enable:
+        password: '%ENC{w5PDosOUw5fDosKQwpbCmA==}'
+
+devices:
+  ARISTA-EOS:
+    os: arieos
+    type: Switch
+    series: Arista 
+    connections:
+      defaults:
+        class: unicon.Unicon
+      cli:
+        protocol: ssh
+        ip: 192.168.1.81
+        arguments: 
+          connection_timeout: 10
+
+  CISCO-IOS:
+    os: ios
+    type: Router
+    # series: CiscoIOS
+    connections:
+      defaults:
+        class: unicon.Unicon
+      cli:
+        protocol: ssh
+        ip: 192.168.1.83
+        arguments: 
+          connection_timeout: 10
