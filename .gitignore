@@ -2,3 +2,10 @@ bin
 venv
 mics
 __pycache__
+pyats_learn
+.cache
+.pyats
+.pylint.d
+.ssh
+.vscode*
+*.txt
