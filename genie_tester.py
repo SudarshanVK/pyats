@@ -27,10 +27,10 @@ for device_name, device in testbed.devices.items():
     # print (json.dumps(output, indent=4))
     
     # use for validating list of neighbors
-    bgp_neighbors = device.learn('bgp')
-    for neighbor in gs['bgp_neighbor_list'][f'{device_name}']:
-    #     print (neighbor)
-        print (json.dumps(bgp_neighbors.info['instance']['default']['vrf']['default']['neighbor'][f'{neighbor}']['session_state'], indent=4))
+    # bgp_neighbors = device.learn('bgp')
+    # for neighbor in gs['bgp_neighbor_list'][f'{device_name}']:
+    # #     print (neighbor)
+    #     print (json.dumps(bgp_neighbors.info['instance']['default']['vrf']['default']['neighbor'][f'{neighbor}']['session_state'], indent=4))
     # print (json.dumps(bgp_neighbors, indent=4))
     # current_bgp_neighbor_list = bgp_neighbors["list_of_neighbors"]
     # gs_bgp_neighbor_list = gs['bgp_neighbor_list'][f'{device_name}']
@@ -40,3 +40,15 @@ for device_name, device in testbed.devices.items():
     
     # bgp = device.learn('bgp')
     # print (json.dumps(bgp.info, indent=4))
+    
+    interface_error = device.learn("interface").info
+    # print (json.dumps(interface_error, indent=4))
+    
+    for interface_name, interface in interface_error.items():
+        # print (f"Interface is {interface_name}")
+        # print (f" Int Properties {json.dumps(interface, indent=4)}")
+        
+        if "counters" in interface.keys():
+            print(interface['counters']['in_errors'])
+            print (interface_name)
+        
