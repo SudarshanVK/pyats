@@ -1,5 +1,5 @@
 """
-test01_testbed_connection.py
+test_connection.py
 Verify that all devices in the testbed can be successfully connected to.
 """
 # see https://pubhub.devnetcloud.com/media/pyats/docs/aetest/index.html
@@ -11,6 +11,7 @@ __credits__ = []
 __version__ = 1.0
 
 import logging
+import yaml
 
 from pyats import aetest
 from unicon.core.errors import TimeoutError, StateMachineError, ConnectionError
@@ -19,6 +20,22 @@ from unicon.core.errors import TimeoutError, StateMachineError, ConnectionError
 logger = logging.getLogger(__name__)
 
 class CommonSetup(aetest.CommonSetup):
+    @aetest.subsection
+    def assert_golden(self, goldenstate):
+        """
+        validate that a golden state was provided during execution.
+        """
+        # make sure network gloden state file is provided
+        assert goldenstate, "Goldenstate is not provided!"
+        
+        #validate that the provided gloden state YAML file is valid
+        try:
+            with open("golden_state.yaml") as gsf:
+                gs = yaml.safe_load(gsf)
+        except (yaml.parser.ParserError):
+            logger.error("Invalid YAML syntax in provided glodenstate file")
+        
+        
     @aetest.subsection
     def connect(self, testbed):
         """
@@ -67,21 +84,8 @@ class CommonCleanup(aetest.CommonCleanup):
     #     pass
 
 
-if __name__ == "__main__":
-    # for stand-alone execution
-    import argparse
-    from pyats import topology
-
-    parser = argparse.ArgumentParser(description="standalone parser")
-    parser.add_argument(
-        "--testbed",
-        dest="testbed",
-        help="testbed YAML file",
-        type=topology.loader.load,
-        default=None,
-    )
-
-    # do the parsing
-    args = parser.parse_known_args()[0]
-
-    aetest.main(testbed=args.testbed)
+# if __name__ == "__main__":
+#     # for stand-alone execution
+#     from pyats import topology
+#     testbed = topology.loader.load(f'{testbed}')
+#     aetest.main(testbed=testbed, goldenstate=goldenstate)

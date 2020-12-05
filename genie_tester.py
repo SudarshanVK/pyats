@@ -12,7 +12,7 @@ testbed = load("svk_testbed.yaml")
 testbed.connect(log_stdout=False)
 
 with open("golden_state.yaml") as gsf:
-    gs = yaml.load(gsf)
+    gs = yaml.safe_load(gsf)
     # print(gs)
 
 # device is actually device parameters eg:- device.os - look at the testbed file
@@ -20,24 +20,23 @@ with open("golden_state.yaml") as gsf:
 for device_name, device in testbed.devices.items():
     print (f"processing host {device_name}")
     logger.info(f"processing host {device_name}")
+    # print (device)
     # interface_info = device.learn("interface").info
     # print (interface_info)
     # output = device.learn("routing").info
     # print (json.dumps(output, indent=4))
     
-    #use for validating list of neighbors
-    bgp_neighbors = device.parse("show bgp all neighbors")
-    current_bgp_neighbor_list = bgp_neighbors["list_of_neighbors"]
-    gs_bgp_neighbor_list = gs['bgp_neighbor_list'][f'{device_name}']
+    # use for validating list of neighbors
+    bgp_neighbors = device.learn('bgp')
+    for neighbor in gs['bgp_neighbor_list'][f'{device_name}']:
+    #     print (neighbor)
+        print (json.dumps(bgp_neighbors.info['instance']['default']['vrf']['default']['neighbor'][f'{neighbor}']['session_state'], indent=4))
+    # print (json.dumps(bgp_neighbors, indent=4))
+    # current_bgp_neighbor_list = bgp_neighbors["list_of_neighbors"]
+    # gs_bgp_neighbor_list = gs['bgp_neighbor_list'][f'{device_name}']
     # print (current_bgp_neighbor_list)
     # print (gs_bgp_neighbor_list)
-    assert current_bgp_neighbor_list == gs_bgp_neighbor_list
-    # print (json.dumps(output1["list_of_neighbors"], indent=4))
-    # print (gs['bgp_neighbor_list'][f'{device_name}'])
     
     
-    # use for validating interface errors
-    # output2 = device.parse("show interface stats")
-    # print (json.dumps(output2, indent=4))
-    
-    
+    # bgp = device.learn('bgp')
+    # print (json.dumps(bgp.info, indent=4))
