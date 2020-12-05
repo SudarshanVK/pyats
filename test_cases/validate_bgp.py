@@ -61,24 +61,27 @@ class verify_bgp(aetest.Testcase):
                 # intrate through the list of neighbors specified in golden state
                 # and validate that the session is established
                 for neighbor in gs['bgp_neighbor_list'][f'{device_name}']:
-                    # extract bgp peering status of the current neighbor
-                    bgp_peer_status = bgp_neighbors.info['instance']['default']['vrf']['default']['neighbor'][f'{neighbor}']['session_state']
+                    # try to extract bgp peering status of the current neighbor
+                    # if not found set step result to failed and break from loop
+                    try:
+                        bgp_peer_status = bgp_neighbors.info['instance']['default']['vrf']['default']['neighbor'][f'{neighbor}']['session_state']
+                    except:
+                        logger.info(f"{device_name} - BGP neighbor validation Failed")
+                        logger.info(f"BGP peering configuration not found for {neighbor}")
+                        step.failed()
+                        break
+                    # if session state was found, validate that the state is established.
+                    # if not, set step result to failed
                     if bgp_peer_status == "Established":
                         logger.info(f"{device_name} - BGP neighbor validation Passed")
                     else:
                         logger.info(f"{device_name} - BGP neighbor validation Failed")
                         logger.info(f"BGP peering status for {neighbor} is {bgp_peer_status}")
                         step.failed()
+
      
         
 class CommonCleanup(aetest.CommonCleanup):
     """CommonCleanup Section
     < common cleanup docstring >
     """
-    
-# if __name__ == "__main__":
-#     # for stand-alone execution
-#     from pyats import topology
-    
-#     # testbed = load('svk_testbed.yaml')
-#     aetest.main(testbed=testbed, goldenstate=goldenstate)

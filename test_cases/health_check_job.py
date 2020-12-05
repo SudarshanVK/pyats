@@ -37,12 +37,12 @@ def main(runtime):
 
     # run script to validate a golden state is provided and connection to all
     # devices are working.
-    # test_connection = os.path.join(SCRIPT_PATH, "test_connection.py")
-    # run(
-    #     testscript=test_connection,
-    #     taskid="Check connection to devices",
-    #     **vars(args),
-    # )
+    test_connection = os.path.join(SCRIPT_PATH, "test_connection.py")
+    run(
+        testscript=test_connection,
+        taskid="Check connection to devices",
+        **vars(args),
+    )
     
     # run script to validate list of BGP neighbors on all devices.
     validate_bgp = os.path.join(SCRIPT_PATH, "validate_bgp.py")

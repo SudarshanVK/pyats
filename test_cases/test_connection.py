@@ -77,15 +77,3 @@ class CommonCleanup(aetest.CommonCleanup):
     """CommonCleanup Section
     < common cleanup docstring >
     """
-
-    # uncomment to add new subsections
-    # @aetest.subsection
-    # def subsection_cleanup_one(self):
-    #     pass
-
-
-# if __name__ == "__main__":
-#     # for stand-alone execution
-#     from pyats import topology
-#     testbed = topology.loader.load(f'{testbed}')
-#     aetest.main(testbed=testbed, goldenstate=goldenstate)
