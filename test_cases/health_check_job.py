@@ -32,8 +32,6 @@ def main(runtime):
     
     #parse args
     args, unknown = parser.parse_known_args()
-    
-    # testbed = topology.loader.load('svk_testbed.yaml')
 
     # run script to validate a golden state is provided and connection to all
     # devices are working.
@@ -41,6 +39,14 @@ def main(runtime):
     run(
         testscript=test_connection,
         taskid="Check connection to devices",
+        **vars(args),
+    )
+    
+    # run script to check for interface errors
+    interface_errors = os.path.join(SCRIPT_PATH, "interface_errors.py")
+    run(
+        testscript=interface_errors,
+        taskid="Check for interface errors",
         **vars(args),
     )
     

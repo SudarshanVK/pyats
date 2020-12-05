@@ -8,8 +8,8 @@ testbed:
         password: '%ENC{w5PDosOUw5fDosKQwpbCmA==}'
 
 devices:
-  ARISTA-EOS:
-    os: arieos
+  CISCO-NXOS:
+    os: nxos
     type: Switch
     series: Arista 
     connections:
