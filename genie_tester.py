@@ -27,18 +27,16 @@ for device_name, device in testbed.devices.items():
     # print (json.dumps(output, indent=4))
     
     # use for validating list of neighbors
-    # bgp_neighbors = device.parse("show bgp all neighbors")
-    # # print (bgp_neighbors)
+    bgp_neighbors = device.learn('bgp')
+    for neighbor in gs['bgp_neighbor_list'][f'{device_name}']:
+    #     print (neighbor)
+        print (json.dumps(bgp_neighbors.info['instance']['default']['vrf']['default']['neighbor'][f'{neighbor}']['session_state'], indent=4))
+    # print (json.dumps(bgp_neighbors, indent=4))
     # current_bgp_neighbor_list = bgp_neighbors["list_of_neighbors"]
     # gs_bgp_neighbor_list = gs['bgp_neighbor_list'][f'{device_name}']
-    # # print (current_bgp_neighbor_list)
-    # # print (gs_bgp_neighbor_list)
-    # assert current_bgp_neighbor_list == gs_bgp_neighbor_list
-    
-    # use for validating interface errors
-    # output2 = device.parse("show interface stats")
-    # print (json.dumps(output2, indent=4))
+    # print (current_bgp_neighbor_list)
+    # print (gs_bgp_neighbor_list)
     
     
-    bgp = device.learn('bgp')
-    print (bgp.info)
+    # bgp = device.learn('bgp')
+    # print (json.dumps(bgp.info, indent=4))

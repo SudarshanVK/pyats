@@ -54,23 +54,21 @@ class verify_bgp(aetest.Testcase):
         for device_name, device in testbed.devices.items():
             # logger.info (f'{device}')
             with steps.start(
-                f"Validate BGP neighbor List for {device_name}", continue_=True
+                f"Validate BGP neighbor session status for {device_name}", continue_=True
             ) as step:
                 # execute command and parse the output
-                bgp_neighbors = device.parse("show bgp all neighbors")
-                # logger.info(f'{bgp_neighbors}')
-                # obtain current list of BGP neighbors from the parsed output
-                current_bgp_neighbor_list = bgp_neighbors["list_of_neighbors"]
-                # obtain list of BGP neighbors from golden state file
-                gs_bgp_neighbor_list = gs['bgp_neighbor_list'][f'{device_name}']
-                
-                if current_bgp_neighbor_list == gs_bgp_neighbor_list:
-                    logger.info(f"{device_name} - BGP neighbor validation Passed")
-                else:
-                    logger.info(f"{device_name} - BGP neighbor validation Failed")
-                    logger.info(f"Expected: {gs_bgp_neighbor_list}")
-                    logger.info(f"Current: {current_bgp_neighbor_list}")
-                    step.failed()
+                bgp_neighbors = device.learn('bgp')
+                # intrate through the list of neighbors specified in golden state
+                # and validate that the session is established
+                for neighbor in gs['bgp_neighbor_list'][f'{device_name}']:
+                    # extract bgp peering status of the current neighbor
+                    bgp_peer_status = bgp_neighbors.info['instance']['default']['vrf']['default']['neighbor'][f'{neighbor}']['session_state']
+                    if bgp_peer_status == "Established":
+                        logger.info(f"{device_name} - BGP neighbor validation Passed")
+                    else:
+                        logger.info(f"{device_name} - BGP neighbor validation Failed")
+                        logger.info(f"BGP peering status for {neighbor} is {bgp_peer_status}")
+                        step.failed()
      
         
 class CommonCleanup(aetest.CommonCleanup):
