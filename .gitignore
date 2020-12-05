@@ -1,4 +1,5 @@
 bin
+# Ignore following files from tracking
 venv
 mics
 __pycache__
