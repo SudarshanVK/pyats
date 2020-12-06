@@ -11,3 +11,4 @@ pyats_learn
 .vscode*
 *.txt
 .bash_history
+svk_*
