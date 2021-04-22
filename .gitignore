@@ -12,3 +12,5 @@ pyats_learn
 *.txt
 .bash_history
 svk_*
+!svk_testbed.yaml
+!run.txt
