@@ -38,7 +38,8 @@ class CommonSetup(aetest.CommonSetup):
     def connect(self, testbed):
         # testbed = topology.loader.load(f"{testbed}")
         testbed.connect()
-        
+
+
 class verify_bgp(aetest.Testcase):
     """
     validate that the list of BGP neighbors on the deice matches the 
@@ -79,8 +80,7 @@ class verify_bgp(aetest.Testcase):
                         logger.info(f"BGP peering status for {neighbor} is {bgp_peer_status}")
                         step.failed()
 
-     
-        
+
 class CommonCleanup(aetest.CommonCleanup):
     """CommonCleanup Section
     < common cleanup docstring >

@@ -26,9 +26,9 @@ def main(runtime):
     """job file entrypoint"""
     parser = argparse.ArgumentParser()
     parser.add_argument ('--goldenstate',
-                         dest = 'goldenstate',
-                         help="goldenstate YAML file",
-                         default = None)
+                        dest = 'goldenstate',
+                        help="goldenstate YAML file",
+                        default = None)
     
     #parse args
     args, unknown = parser.parse_known_args()
