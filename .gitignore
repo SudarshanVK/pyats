@@ -14,3 +14,4 @@ pyats_learn
 svk_*
 !svk_testbed.yaml
 !run.txt
+*.pdf
