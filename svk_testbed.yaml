@@ -1,17 +1,17 @@
 testbed:
   name: SVK AUTOMATION LAB
   credentials:
-      default:
-        password: cisco123
-        username: cisco
-      enable:
-        password: cisco123
+    default:
+      password: cisco123
+      username: cisco
+    enable:
+      password: cisco123
 
 devices:
-  Router1:
+  ROUTER1:
     os: ios
     type: Router
-    series: CiscoIOS
+    # series: CiscoIOS
     platform: ios
     connections:
       defaults:
@@ -19,13 +19,13 @@ devices:
       cli:
         protocol: ssh
         ip: 192.168.100.50
-        arguments: 
+        arguments:
           connection_timeout: 10
 
-  Router2:
+  ROUTER2:
     os: ios
     type: Router
-    series: CiscoIOS
+    # series: CiscoIOS
     platform: ios
     connections:
       defaults:
@@ -33,13 +33,13 @@ devices:
       cli:
         protocol: ssh
         ip: 192.168.100.51
-        arguments: 
+        arguments:
           connection_timeout: 10
 
-  Router3:
+  ROUTER3:
     os: ios
     type: Router
-    series: CiscoIOS 
+    # series: CiscoIOS
     platform: ios
     connections:
       defaults:
@@ -47,13 +47,13 @@ devices:
       cli:
         protocol: ssh
         ip: 192.168.100.52
-        arguments: 
+        arguments:
           connection_timeout: 10
 
-  Router4:
+  ROUTER4:
     os: ios
     type: Router
-    series: CiscoIOS 
+    # series: CiscoIOS
     platform: ios
     connections:
       defaults:
@@ -61,5 +61,5 @@ devices:
       cli:
         protocol: ssh
         ip: 192.168.100.53
-        arguments: 
+        arguments:
           connection_timeout: 10

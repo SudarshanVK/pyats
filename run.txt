@@ -3,6 +3,11 @@ pyats learn ospf --testbed-file <filename>
 
 pyats validate testbed <testbed file>
 
-pyats run job <path to testcase job file> --testbed <path to testbed file>
-pyats logs view
 
+# Execute health check job
+pyats run job ./test_cases/health_check_job.py --testbed svk_testbed.yaml --goldenstate golden_state.yaml
+
+
+# view logs
+pyats logs view --host 0.0.0.0 --port 8443
+http://10.40.41.170:8443

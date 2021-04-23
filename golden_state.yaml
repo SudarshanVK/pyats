@@ -1,13 +1,13 @@
 bgp_neighbor_list:
-  Router1:
-    - 10.10.12.2
-    - 10.10.13.3
-  Router2:
-    - 10.10.12.1
-    - 10.10.24.4
-  Router3:
-    - 10.10.13.1
-    - 10.10.34.4
-  Router4:
-    - 10.10.24.2
-    - 10.10.34.3
+  ROUTER1:
+    - 10.10.12.2 #ROUTER2
+    - 10.10.14.4 #ROUTER4
+  ROUTER2:
+    - 10.10.12.1 #ROUTER1
+    - 10.10.23.3 #ROUTER3
+  ROUTER3:
+    - 10.10.23.2 #ROUTER2
+    - 10.10.34.4 #ROUTER4
+  ROUTER4:
+    - 10.10.14.1 #ROUTER1
+    - 10.10.34.3 #ROUTER3
