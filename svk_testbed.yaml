@@ -11,7 +11,6 @@ devices:
   ROUTER1:
     os: ios
     type: Router
-    # series: CiscoIOS
     platform: ios
     connections:
       defaults:
@@ -25,7 +24,6 @@ devices:
   ROUTER2:
     os: ios
     type: Router
-    # series: CiscoIOS
     platform: ios
     connections:
       defaults:
@@ -39,7 +37,6 @@ devices:
   ROUTER3:
     os: ios
     type: Router
-    # series: CiscoIOS
     platform: ios
     connections:
       defaults:
@@ -53,7 +50,6 @@ devices:
   ROUTER4:
     os: ios
     type: Router
-    # series: CiscoIOS
     platform: ios
     connections:
       defaults:

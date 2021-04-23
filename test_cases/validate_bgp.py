@@ -29,7 +29,7 @@ class CommonSetup(aetest.CommonSetup):
         
         # Convert pyATS testbed to Genie Testbed
         logger.info(
-            "Converting pyATS testbed to Genie Testbed to support pyATS Library features"
+            "Loading testbed file"
         )
         testbed = load(testbed)
         self.parent.parameters.update(testbed=testbed)

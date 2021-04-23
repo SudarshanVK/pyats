@@ -25,6 +25,9 @@ class CommonSetup(aetest.CommonSetup):
         """
         validate that a golden state was provided during execution.
         """
+        logger.info(
+            "Checking if Glodenstate file was provided"
+        )
         # make sure network gloden state file is provided
         assert goldenstate, "Goldenstate is not provided!"
         
@@ -41,6 +44,9 @@ class CommonSetup(aetest.CommonSetup):
         """
         establishes connection to all your testbed devices.
         """
+        logger.info(
+            "Checking if Testbed file was provided"
+        )
         # make sure testbed is provided
         assert testbed, "Testbed is not provided!"
 

@@ -29,20 +29,24 @@ class CommonSetup(aetest.CommonSetup):
         
         # Convert pyATS testbed to Genie Testbed
         logger.info(
-            "Converting pyATS testbed to Genie Testbed to support pyATS Library features"
+            "Loading testbed file"
         )
         testbed = load(testbed)
         self.parent.parameters.update(testbed=testbed)
         
     @aetest.subsection
     def connect(self, testbed):
+        
+        logger.info(
+            "Establishing connection to devices in the Testbed file"
+        )
         # testbed = topology.loader.load(f"{testbed}")
         testbed.connect()
         
 class int_err(aetest.Testcase):
     """
-    validate that the list of BGP neighbors on the deice matches the 
-    list provided in gloden state
+    validate that there are no in_errors or out_errors or crc_errors in
+    any of the interfaces for each device.
     """
     
     @aetest.setup
