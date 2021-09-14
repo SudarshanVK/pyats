@@ -19,34 +19,30 @@ from unicon.core.errors import TimeoutError, StateMachineError, ConnectionError
 # create a logger for this module
 logger = logging.getLogger(__name__)
 
+
 class CommonSetup(aetest.CommonSetup):
     @aetest.subsection
     def assert_golden(self, goldenstate):
         """
         validate that a golden state was provided during execution.
         """
-        logger.info(
-            "Checking if Glodenstate file was provided"
-        )
+        logger.info("Checking if Glodenstate file was provided")
         # make sure network gloden state file is provided
         assert goldenstate, "Goldenstate is not provided!"
-        
-        #validate that the provided gloden state YAML file is valid
+
+        # validate that the provided gloden state YAML file is valid
         try:
             with open("golden_state.yaml") as gsf:
                 gs = yaml.safe_load(gsf)
         except (yaml.parser.ParserError):
             logger.error("Invalid YAML syntax in provided glodenstate file")
-        
-        
+
     @aetest.subsection
     def connect(self, testbed):
         """
         establishes connection to all your testbed devices.
         """
-        logger.info(
-            "Checking if Testbed file was provided"
-        )
+        logger.info("Checking if Testbed file was provided")
         # make sure testbed is provided
         assert testbed, "Testbed is not provided!"
 

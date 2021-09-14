@@ -25,12 +25,11 @@ SCRIPT_PATH = os.path.dirname(__file__)
 def main(runtime):
     """job file entrypoint"""
     parser = argparse.ArgumentParser()
-    parser.add_argument ('--goldenstate',
-                        dest = 'goldenstate',
-                        help="goldenstate YAML file",
-                        default = None)
-    
-    #parse args
+    parser.add_argument(
+        "--goldenstate", dest="goldenstate", help="goldenstate YAML file", default=None
+    )
+
+    # parse args
     args, unknown = parser.parse_known_args()
 
     # run script to validate a golden state is provided and connection to all
@@ -41,7 +40,7 @@ def main(runtime):
         taskid="Check connection to devices",
         **vars(args),
     )
-    
+
     # run script to check for interface errors
     interface_errors = os.path.join(SCRIPT_PATH, "interface_errors.py")
     run(
@@ -49,11 +48,11 @@ def main(runtime):
         taskid="Check for interface errors",
         **vars(args),
     )
-    
+
     # run script to validate list of BGP neighbors on all devices.
     validate_bgp = os.path.join(SCRIPT_PATH, "validate_bgp.py")
     run(
         testscript=validate_bgp,
         taskid="Validate BGP neighbor list",
         **vars(args),
-    )    
+    )

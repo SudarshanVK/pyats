@@ -18,14 +18,14 @@ with open("golden_state.yaml") as gsf:
 # device is actually device parameters eg:- device.os - look at the testbed file
 # and it will make sense.
 for device_name, device in testbed.devices.items():
-    print (f"processing host {device_name}")
+    print(f"processing host {device_name}")
     logger.info(f"processing host {device_name}")
     # print (device)
     # interface_info = device.learn("interface").info
     # print (interface_info)
     # output = device.learn("routing").info
     # print (json.dumps(output, indent=4))
-    
+
     # use for validating list of neighbors
     # bgp_neighbors = device.learn('bgp')
     # for neighbor in gs['bgp_neighbor_list'][f'{device_name}']:
@@ -36,19 +36,17 @@ for device_name, device in testbed.devices.items():
     # gs_bgp_neighbor_list = gs['bgp_neighbor_list'][f'{device_name}']
     # print (current_bgp_neighbor_list)
     # print (gs_bgp_neighbor_list)
-    
-    
+
     # bgp = device.learn('bgp')
     # print (json.dumps(bgp.info, indent=4))
-    
+
     interface_error = device.learn("interface").info
     # print (json.dumps(interface_error, indent=4))
-    
+
     for interface_name, interface in interface_error.items():
         # print (f"Interface is {interface_name}")
         # print (f" Int Properties {json.dumps(interface, indent=4)}")
-        
+
         if "counters" in interface.keys():
-            print(interface['counters']['in_errors'])
-            print (interface_name)
-        
+            print(interface["counters"]["in_errors"])
+            print(interface_name)

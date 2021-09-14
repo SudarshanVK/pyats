@@ -3,9 +3,6 @@ interface_errors.py
 Verify that there are no CRC's on any interfaces
 provided.
 """
-# see https://pubhub.devnetcloud.com/media/pyats/docs/aetest/index.html
-# for documentation on pyATS test scripts
-
 __author__ = "SVK"
 __contact__ = ["sudarshan.net09@gmail.com"]
 __credits__ = []
@@ -26,29 +23,26 @@ logger = logging.getLogger(__name__)
 class CommonSetup(aetest.CommonSetup):
     @aetest.subsection
     def load_testbed(self, testbed):
-        
+
         # Convert pyATS testbed to Genie Testbed
-        logger.info(
-            "Loading testbed file"
-        )
+        logger.info("Loading testbed file")
         testbed = load(testbed)
         self.parent.parameters.update(testbed=testbed)
-        
+
     @aetest.subsection
     def connect(self, testbed):
-        
-        logger.info(
-            "Establishing connection to devices in the Testbed file"
-        )
+
+        logger.info("Establishing connection to devices in the Testbed file")
         # testbed = topology.loader.load(f"{testbed}")
         testbed.connect()
-        
+
+
 class int_err(aetest.Testcase):
     """
     validate that there are no in_errors or out_errors or crc_errors in
     any of the interfaces for each device.
     """
-    
+
     @aetest.setup
     def setup(self, testbed):
         """Learn and save the interface details from the testbed devices."""
@@ -78,21 +72,25 @@ class int_err(aetest.Testcase):
                         if "counters" in interface.keys():
                             # look for error counters with value greater than 0
                             # if found, log and fail the step
-                            if interface['counters']['in_errors'] > 0 or interface['counters']['in_crc_errors'] > 0 or interface['counters']['out_errors'] > 0:
+                            if (
+                                interface["counters"]["in_errors"] > 0
+                                or interface["counters"]["in_crc_errors"] > 0
+                                or interface["counters"]["out_errors"] > 0
+                            ):
                                 logger.info(
                                     f"Interface {interface} error counters check Failed"
-                                    )
+                                )
                                 logger.info(
                                     f"In error = {interface['counters']['in_error']}"
-                                    )
+                                )
                                 logger.info(
                                     f"CRC error = {interface['counters']['in_crc_error']}"
-                                    )
+                                )
                                 logger.info(
                                     f"Out error = {interface['counters']['out_error']}"
-                                    )
+                                )
                                 step.failed()
-                            # If no errors found, log and mark test as Passes 
+                            # If no errors found, log and mark test as Passes
                             else:
                                 logger.info("Interface error validation Passed")
                         else:
